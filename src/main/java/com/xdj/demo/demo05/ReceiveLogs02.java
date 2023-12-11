@@ -26,9 +26,10 @@ public class ReceiveLogs02 {//消费者2
         DeliverCallback deliverCallback = (s, delivery) -> {
             String message = new String(delivery.getBody(), "UTF-8");
             BufferedWriter bufferedWriter =
-                    new BufferedWriter(new OutputStreamWriter(new FileOutputStream("src\\\\data.txt"), "UTF-8"));
+                    new BufferedWriter(new OutputStreamWriter(new FileOutputStream("src/data.txt"), "UTF-8"));
             System.out.println("将消息写入文件");
             bufferedWriter.write(message);
+            bufferedWriter.close();
         };
         channel.basicConsume(queue, true, deliverCallback, consumerTag -> {});
     }
